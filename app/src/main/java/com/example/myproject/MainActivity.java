@@ -2,6 +2,7 @@ package com.example.myproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +14,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 {
     TextView hasil;
     EditText angka1, angka2;
-    Button clickBtn;
+    Button clickBtn, moveBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -23,8 +24,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         angka2 = findViewById(R.id.angka2);
         hasil = findViewById(R.id.hasil);
         clickBtn = findViewById(R.id.btnClick);
+        moveBtn = findViewById(R.id.btnMove);
 
         clickBtn.setOnClickListener(this);
+        moveBtn.setOnClickListener(this);
     }
 
     @Override
@@ -34,6 +37,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnClick:
                 int res = Integer.parseInt(angka1.getText().toString()) + Integer.parseInt(angka2.getText().toString());
                 hasil.setText(res+"");
+                break;
+            case R.id.btnMove:
+                Intent namanya = new Intent(MainActivity.this, Main2Activity.class);
+                namanya.putExtra("result", hasil.getText().toString());
+                startActivity(namanya);
                 break;
         }
     }
